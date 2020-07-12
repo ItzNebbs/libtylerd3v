@@ -1,7 +1,7 @@
 # libtylerd3v
 Library with several classes used in my tweaks.
 
-## How to Use
+## Initial Setup
 If you wish to use this library in your tweak preferences, here's how to set it up:
 - Install libtylerd3v on your device from the Packix Repo
 - Copy the .dylib from your device to your $THEOS/lib folder (I use the scp command to do this)
