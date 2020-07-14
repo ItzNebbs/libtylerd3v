@@ -1,6 +1,7 @@
 #import <Preferences/PSListController.h>
 #import <Preferences/PSSpecifier.h>
 @import MobileCoreServices;
+#import <notify.h>
 @import Photos;
 
 @interface UIImage(TDIP)

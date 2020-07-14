@@ -9,48 +9,8 @@ If you wish to use this library in your tweak preferences, here's how to set it 
 - In the Makefile for your preferences, add the line ```$(BUNDLE_NAME)_LIBRARIES = tylerd3v```
 - Add ```Depends: xyz.tylerd3v.libtylerd3v``` to your tweaks control file
 
-## TDApplyListController
-TDApplyListController is a regular PSListController, with an Apply button at the right side of the Navigation Bar.
-
-XXXRootListController.h:
-```objective-c
-#import <TDApplyListController.h>
-
-@interface XXXRootListController : TDApplyListController
-@end
-```
-
-XXXRootListController.m
-```objective-c
-#import "XXXRootListController.h"
-
-@implementation XXXRootListController
-- (NSMutableArray *)specifiers {
-	return [super specifiers];
-}
-- (NSString *)plistName {
-	return @"Root";
-}
-@end
-```
-TDApplyListController also includes the ability to show/hide cells using a PSSwitchCell. Here's an example:
-```xml
-<key>cell</key>
-<string>PSSwitchCell</string>
-<key>default</key>
-<true/>
-<key>defaults</key>
-<string>com.yourtweakprefs.bundleid</string>
-<key>key</key>
-<string>kEnabled</string>
-<key>label</key>
-<string>Enabled</string>
-<key>nestedEntryCount</key> <!-- The identifier for showing/hiding cells. -->
-<integer>18</integer> <!-- Number of Cells to show/hide. Including any PSGroupCells. -->
-```
-
 ## TDListController
-TDListController is just a regular PSListController.
+TDListController is just a regular PSListController, with the ability to easily add an apply button to the navigation bar.
 
 XXXRootListController.h:
 ```objective-c
@@ -71,6 +31,10 @@ XXXRootListController.m
 - (NSString *)plistName {
 	return @"Root";
 }
+- (void)loadView {
+	[super loadView];
+	_hideApplyButton = NO; // Change to YES to hide Apply button.
+}
 @end
 ```
 TDListController also includes the ability to show/hide cells using a PSSwitchCell. Here's an example:
@@ -87,7 +51,7 @@ TDListController also includes the ability to show/hide cells using a PSSwitchCe
 	<key>label</key>
 	<string>Enabled</string>
 	<key>nestedEntryCount</key> <!-- The identifier for showing/hiding cells. -->
-	<integer>18</integer> <!-- Number of Cells to show/hide. Including any PSGroupCells. -->
+	<integer>1</integer> <!-- Number of Cells to show/hide. Including any PSGroupCells. -->
 </dict>
 ```
 
@@ -119,5 +83,47 @@ In your .plist file:
 	<true/>
 	<key>compressionQuality</key>
 	<real>1.0</real>
+</dict>
+```
+
+## TDDiscordCell
+TDDiscordCell is a link cell that is made to easily invite users to a Discord server!
+
+Add the line ```#import <TDDiscordCell.h>``` to your XXXRootListController.h.
+
+In your .plist file:
+```xml
+<dict>
+	<key>cellClass</key>
+	<string>TDDiscordCell</string>
+	<key>icon</key>
+	<string>discord.png</string> <!-- Desired Icon -->
+	<key>label</key>
+	<string>Discord Server</string>
+	<key>subtitle</key>
+	<string>Join the Discord!</string>
+	<key>link</key>
+	<string>s6p62JQ</string> <!-- Discord Invite -->
+</dict>
+```
+
+## TDTwitterCell
+TDTwitterCell is a link cell that is made to easily redirect users to a Twitter profile!
+
+Add the line ```#import <TDTwitterCell.h>``` to your XXXRootListController.h.
+
+In your .plist file:
+```xml
+<dict>
+	<key>cellClass</key>
+	<string>TDTwitterCell</string>
+	<key>icon</key>
+	<string>twitter.png</string> <!-- Desired Icon -->
+	<key>label</key>
+	<string>TylerD3V</string>
+	<key>subtitle</key>
+	<string>Follow Me on Twitter!</string>
+	<key>link</key>
+	<string>TylerD3V</string> <!-- Twitter Username -->
 </dict>
 ```
